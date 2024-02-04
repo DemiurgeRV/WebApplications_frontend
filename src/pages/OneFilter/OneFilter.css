@@ -1,0 +1,35 @@
+.filter-details {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background: #72089c;
+    color: white;
+    border-radius: 15px;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 4px 30px -10px rgba(0, 0, 0, 0.2);
+}
+
+.to-home {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    transition: all .3s ease;
+}
+
+.to-home:hover {
+    color: dodgerblue;
+}
+
+.left img {
+    width: 500px;
+    height: 400px;
+    border-radius: 15px;
+}
+
+.right {
+    width: calc(100% - 550px);
+}

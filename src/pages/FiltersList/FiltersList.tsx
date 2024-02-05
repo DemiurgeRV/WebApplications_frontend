@@ -12,6 +12,7 @@ import FILTERS_MOCK from '../../modules/mock'
 const FiltersList: FC = () => {
     const [searchFilter, setSearchFilter] = useState('')
     const [filters, setFilters] = useState<Filter[]>([])
+    const [isMock, setIsMock] = useState(false)
     const breadcrumbsLinks: BreadcrumbLink[] = [
         { label: 'Фильтры', url: ROUTES.FILTERS },
     ]
@@ -20,7 +21,10 @@ const FiltersList: FC = () => {
         fetch(`http://localhost:8000/api/filters/`)
         .then((response) => response.json())
         .then((jsonFilters) => setFilters(jsonFilters.filters))
-        .catch(() => (setFilters(FILTERS_MOCK)))
+        .catch(() => {
+            setIsMock(true);
+            setFilters(FILTERS_MOCK)
+        })
     },[])
 
     const handleSearch = async () => {
@@ -28,15 +32,20 @@ const FiltersList: FC = () => {
         const jsonFilters = await response.json()
         setFilters(jsonFilters.filters)
     }
+
+    const handleSearchMock = async () => {
+        setFilters(FILTERS_MOCK.filter((filter: Filter) => filter.name.toLowerCase().startsWith(searchFilter.toLowerCase())));
+      };
     
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        handleSearch();
+        if (isMock == true){
+            handleSearchMock();
+        }
+        else {
+            handleSearch();
+        }
     }
-
-    useEffect(() => {
-        handleSearch
-    },[searchFilter])
 
     return (
         <div>

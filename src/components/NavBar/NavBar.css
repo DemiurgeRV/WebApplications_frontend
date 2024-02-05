@@ -1,0 +1,31 @@
+.mynavbar {
+    background-color: #3b3b3b; 
+    padding: 15px;
+  }
+  
+  .navbar-nav {
+    display: flex;
+  }
+  
+  .nav-link {
+    color: #dee2e6; /* Цвет ссылок */
+    font-weight: bold; /* Жирный шрифт */
+    margin: 0 10px; /* Отступы между ссылками */
+    text-decoration: none;
+    transition: all .4s ease;
+  }
+  
+  .nav-link:hover {
+    color: #f0b71d; /* Цвет ссылок при наведении */
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-nav {
+      flex-direction: column; /* Отображение ссылок вертикально на мобильных устройствах */
+      align-items: center; /* Выравнивание по центру на мобильных устройствах */
+    }
+  
+    .nav-link {
+      margin: 10px 0; /* Увеличение отступов между ссылками на мобильных устройствах */
+    }
+  }

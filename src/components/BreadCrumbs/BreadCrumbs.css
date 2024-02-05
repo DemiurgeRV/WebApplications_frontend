@@ -1,5 +1,5 @@
 :root {
-    --active_color: black;
+    --active_color: #dee2e6;
     --additional_color: gray;
   }
   
@@ -7,7 +7,7 @@
     list-style: none;
     display: flex;
     gap: 10px;
-    padding: 20px;
+    padding: 0px 20px;
   }
   
   .breadcrumbs * {
@@ -25,5 +25,5 @@
   }
   
   .breadcrumbs li:last-child {
-    color: var(--active_color);
+    color: var(--additional_color);
   }

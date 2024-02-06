@@ -15,7 +15,7 @@ interface Props {
 }
 
 const FilterCard: FC<Props> = (props) => {
-    const img = props.data.image ? `http://127.0.0.1:8000/api/filters/${props.data.id}/image/` : image
+    const img = props.data.image ? `/api/filters/${props.data.id}/image/` : image
     return (
         <div className='card'>
             <a href={`http://localhost:3000/filters/${props.data.id}/`}><Col>

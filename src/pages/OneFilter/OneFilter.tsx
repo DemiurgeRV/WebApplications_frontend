@@ -26,10 +26,10 @@ const OneFilter: FC = () => {
         { label: filter?.name, url: `${ROUTES.FILTERS}/${id}` }
     ]
 
-    const img = filter?.image ? `http://127.0.0.1:8000/api/filters/${filter?.id}/image/` : image
+    const img = filter?.image ? `/api/filters/${filter?.id}/image/` : image
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/filters/${id}/`)
+        fetch(`/api/filters/${id}/`)
         .then((response) => response.json())
         .then((jsonFilter) => setFilter(jsonFilter))
         .catch(() => (setFilter(FILTERS_MOCK.find((filter:Filter) => String(filter.id) == id))))

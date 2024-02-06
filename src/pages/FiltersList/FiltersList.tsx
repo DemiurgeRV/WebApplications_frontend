@@ -18,7 +18,7 @@ const FiltersList: FC = () => {
     ]
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/filters/`)
+        fetch(`/api/filters/`)
         .then((response) => response.json())
         .then((jsonFilters) => setFilters(jsonFilters.filters))
         .catch(() => {
@@ -28,7 +28,7 @@ const FiltersList: FC = () => {
     },[])
 
     const handleSearch = async () => {
-        const response = await fetch(`http://localhost:8000/api/filters/?search-filter=${searchFilter}`)
+        const response = await fetch(`/api/filters/?search-filter=${searchFilter}`)
         const jsonFilters = await response.json()
         setFilters(jsonFilters.filters)
     }

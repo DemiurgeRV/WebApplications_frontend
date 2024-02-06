@@ -7,8 +7,7 @@ import Header from "./components/NavBar/NavBar";
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename="/WebApplications_frontend">
         <Header />
         <Routes>
           <Route path={ROUTES.HOME} element={<Navigate to={ROUTES.FILTERS} replace />}  />
@@ -16,7 +15,6 @@ function App() {
           <Route path={`${ROUTES.FILTERS}/:id`} element={<OneFilter />} />
         </Routes>
       </BrowserRouter>
-    </div>
   );
 }
 

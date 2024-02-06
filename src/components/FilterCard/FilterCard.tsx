@@ -19,7 +19,7 @@ const FilterCard: FC<Props> = (props) => {
     const img = props.data.image ? `/api/filters/${props.data.id}/image/` : image
     return (
         <div className='card'>
-            <Link to={`/filters/${props.data.id}/`}><Col>
+            <Link to={`./${props.data.id}/`}><Col>
                 <img src={img} className="images" />
                 <h3>{ props.data.name }</h3><br />
             </Col></Link>

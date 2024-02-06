@@ -41,7 +41,7 @@ const OneFilter: FC = () => {
             <BreadCrumbs crumbs={breadcrumbsLinks} />
             <div className="content-wrapper">
                 <div className="filter-details">
-                    <Link to={`/filters`} className="to-home">Назад</Link>
+                    <Link to={`../filters`} className="to-home">Назад</Link>
                     <div className="left">
                         <img src={img} />
                     </div>

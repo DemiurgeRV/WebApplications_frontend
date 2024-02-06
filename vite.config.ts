@@ -10,5 +10,5 @@ export default defineConfig({
         }
   },
   plugins: [react()],
-  base: "/WebApplications_frontend"
+  base: "/WebApplications_frontend/"
 })

@@ -11,7 +11,7 @@ function Header() {
       <Container>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to="/filters" className='link'>Фильтры</Link>
+            <Link to="./filters" className='link'>Фильтры</Link>
             <Link to="/orders" className='link'>Заявка</Link>
             <Link to="/profile" className='link'>Личный кабинет</Link>
           </Nav>

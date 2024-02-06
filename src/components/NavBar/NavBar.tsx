@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import './NavBar.css'
+import { Link } from 'react-router-dom';
 
 
 function Header() {
@@ -10,9 +11,9 @@ function Header() {
       <Container>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/filters">Фильтры</Nav.Link>
-            <Nav.Link href="/orders">Заявка</Nav.Link>
-            <Nav.Link href="/profile">Личный кабинет</Nav.Link>
+            <Link to="/filters" className='link'>Фильтры</Link>
+            <Link to="/orders" className='link'>Заявка</Link>
+            <Link to="/profile" className='link'>Личный кабинет</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -6,6 +6,7 @@ import BreadCrumbs from "../../components/BreadCrumbs/BreadCrumbs"
 import { BreadcrumbLink } from '../../components/BreadCrumbs/BreadCrumbs'
 import FILTERS_MOCK from "../../modules/mock"
 import image from '../../components/FilterCard/default.jpg'
+import { Link } from "react-router-dom"
 
 interface Filter {
     id: number
@@ -40,7 +41,7 @@ const OneFilter: FC = () => {
             <BreadCrumbs crumbs={breadcrumbsLinks} />
             <div className="content-wrapper">
                 <div className="filter-details">
-                    <a className="to-home" href="/filters">Назад</a>
+                    <Link to={`/filters`} className="to-home">Назад</Link>
                     <div className="left">
                         <img src={img} />
                     </div>

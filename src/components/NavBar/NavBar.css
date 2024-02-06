@@ -7,7 +7,7 @@
     display: flex;
   }
   
-  .nav-link {
+  .link {
     color: #dee2e6; /* Цвет ссылок */
     font-weight: bold; /* Жирный шрифт */
     margin: 0 10px; /* Отступы между ссылками */
@@ -15,7 +15,7 @@
     transition: all .4s ease;
   }
   
-  .nav-link:hover {
+  .link:hover {
     color: #f0b71d; /* Цвет ссылок при наведении */
   }
   

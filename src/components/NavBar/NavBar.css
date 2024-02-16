@@ -7,22 +7,47 @@
     display: flex;
   }
   
+  .me-auto {
+    display: flex;
+    align-items: center;
+  }
+
+  .me-auto h4 {
+    margin: 0 10px;
+    font-size: 16px;
+  }
+  
   .link {
-    color: #dee2e6; /* Цвет ссылок */
-    font-weight: bold; /* Жирный шрифт */
-    margin: 0 10px; /* Отступы между ссылками */
+    color: #dee2e6;
+    font-weight: bold; 
+    margin: 0 10px; 
     text-decoration: none;
     transition: all .4s ease;
   }
   
   .link:hover {
-    color: #f0b71d; /* Цвет ссылок при наведении */
+    color: #f0b71d;
+  }
+
+  .exit {
+    font-family: Verdana;
+    background: #3b3b3b;
+    font-size: 16px;
+    border: none;
+    color: #dee2e6;
+    font-weight: bold; 
+    transition: all .4s ease;
+    cursor: pointer;
+  }
+
+  .exit:hover {
+    color: #f0b71d;
   }
   
   @media (max-width: 768px) {
     .navbar-nav {
-      flex-direction: column; /* Отображение ссылок вертикально на мобильных устройствах */
-      align-items: center; /* Выравнивание по центру на мобильных устройствах */
+      flex-direction: column; 
+      align-items: center; 
     }
   
     .nav-link {

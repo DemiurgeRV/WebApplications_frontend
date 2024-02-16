@@ -1,0 +1,58 @@
+.auth-wrapper {
+    padding: 40px;
+}
+
+.login-form {
+    width: 26%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #3b3b3b;
+    border-radius: 10px;
+    padding: 20px;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-login {
+    font-size: 20px;
+}
+
+.login-form input {
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    outline: none;
+    padding: 4px;
+    margin-top: 10px;
+    width: 80%;
+}
+
+.login-form input:focus {
+    border-color: #f0b71d;
+}
+
+.btn-login {
+    margin-top: 14px;
+    border-radius: 18px;
+    background: #f0b71d;;
+    color:#ffffff;
+    width: 80px;
+    padding: 3px 3px 3px 3px;
+    height: 32px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.btn-login:hover {
+    background: #d69d20;
+}
+
+.navigate {
+    font-size: 14px;
+}

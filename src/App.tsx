@@ -6,6 +6,7 @@ import { ROUTES } from "./Routes";
 import Header from "./components/NavBar/NavBar";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import OrdersPage from "./pages/OrdersPage/OrdersPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path={ROUTES.FILTERS} element={<FiltersList />} />
             <Route path={`${ROUTES.FILTERS}/:id`} element={<OneFilter />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
           </Routes>
         </BrowserRouter>
       </Provider>

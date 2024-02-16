@@ -1,0 +1,68 @@
+.orders {
+    overflow-x: auto;
+}
+
+.custom-table {
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+}
+
+.custom-table th, td {
+    white-space: nowrap;
+    min-width: 100px;
+    box-sizing: border-box;
+}
+
+.custom-table th {
+    padding: 8px;
+    background: #f0b71d;
+    color: #ffffff;
+}
+
+.custom-table td {
+    padding: 8px;
+    text-align: center;
+}
+
+.custom-table tr {
+    background-color: #3b3b3b;
+}
+
+.custom-table tr:hover {
+    background-color: #545454;
+    cursor: pointer;
+}
+
+.input-field {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.status {
+    padding: 10px;
+    font-size: 18px;
+}
+
+.select-status {
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 15px;
+    border: 2px solid #ccc;
+    outline: none;
+}
+
+.select-status:focus {
+    border-color: #f0b71d;
+}
+
+.date-picker {
+    margin-left: 20px;
+    font-size: 16px;
+    padding: 4px;
+    border-radius: 15px;
+    border: 2px solid #ccc;
+    outline: none;
+}

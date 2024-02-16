@@ -13,12 +13,13 @@ const loginSlice = createSlice({
         setUser(state, {payload}) {
             state.is_auth = true,
             state.role = payload.role,
-            state.login = payload.login
+            state.login = payload.login,
+            localStorage.setItem('is_auth', payload.is_auth),
+            localStorage.setItem('login', payload.login)
         },
         logoutUser(state) {
             state.is_auth = false,
-            state.role = false,
-            state.login = ''
+            state.role = false
         }
     }
 })  

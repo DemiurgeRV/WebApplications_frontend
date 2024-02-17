@@ -16,6 +16,10 @@
     position: relative;
 }
 
+span {
+    margin-bottom: 20px;
+}
+
 .to-orders {
     font-size: 18px;
     text-decoration: none;
@@ -56,4 +60,69 @@
 
 .table tr {
     background-color: #3b3b3b;
+}
+
+.form-order {
+    padding: 8px 16px;
+    font-size: 16px;
+    background: #0dd51a;
+    border-radius: 8px;
+    color: white;
+    transition: all .3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-order {
+    padding: 8px 16px;
+    font-size: 16px;
+    background: #d60b0b;
+    border-radius: 8px;
+    color: white;
+    transition: all .3s ease;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.form-order:hover {
+    transform: scale(1.1);
+    background-color: #0db118;
+}
+
+.delete-order:hover {
+    transform: scale(1.1);
+    background-color: rgb(181, 16, 16)
+}
+
+.delete-filter-from-order {
+    padding: 8px 16px;
+    font-size: 16px;
+    background: #d60b0b;
+    border-radius: 8px;
+    color: white;
+    transition: all .3s ease;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.delete-filter-from-order:hover {
+    transform: scale(1.1);
+    background-color: rgb(181, 16, 16)
+}
+
+.power {
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    outline: none;
+    padding: 4px;
+    border-radius: 15px;
+}
+
+.power:focus {
+    border-color: #f0b71d;
 }

@@ -32,8 +32,6 @@ const FiltersList: FC = () => {
         })
     },[])
 
-    console.log(draft)
-
     const handleSearch = async () => {
         const response = await fetch(`/api/filters/?search-filter=${searchFilter}`)
         const jsonFilters = await response.json()

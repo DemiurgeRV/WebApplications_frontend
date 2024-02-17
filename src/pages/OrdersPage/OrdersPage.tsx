@@ -9,7 +9,6 @@ import { setEndData, setStartData, setStatus } from "../../store/slice/OrdersSli
 import { useNavigate } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
 import { format } from 'date-fns'
-import Cookies from 'js-cookie'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { ru } from 'date-fns/locale'
@@ -26,8 +25,6 @@ interface Order {
 
 const OrdersPage: FC = () => {
     const [orders, setOrders] = useState<Order[]>([])
-
-    const session = Cookies.get('session_id')
 
     const status = useSelector((state: RootState) => state.orders.status)
     const startDate = useSelector((state: RootState) => state.orders.startDate)
@@ -63,17 +60,7 @@ const OrdersPage: FC = () => {
                 ...(startDate && {date_start: format(new Date(startDate), 'yyyy-MM-dd HH:mm')}),
                 ...(endDate && {date_end: format(new Date(endDate), 'yyyy-MM-dd HH:mm')}),
             }, 
-            headers: {'Cookie': `session_id=${session}`}
         })
-        response.data.forEach((req: Order) => {
-            req.date_created = (new Date(req.date_created)).toISOString().replace("T", " ").replace("Z", "").substring(0, 16);
-            req.date_formation = req.date_formation
-                ? (new Date(req.date_formation)).toISOString().replace("T", " ").replace("Z", "").substring(0, 16)
-                : null;
-            req.date_complete = req.date_complete
-                ? (new Date(req.date_complete)).toISOString().replace("T", " ").replace("Z", "").substring(0, 16)
-                : null;
-        });
         setOrders(response.data)
     }
 
@@ -125,16 +112,18 @@ const OrdersPage: FC = () => {
                             <th className='text-center'>Дата создания</th>
                             <th className='text-center'>Дата формирования</th>
                             <th className='text-center'>Дата завершения</th>
+                            <th className='text-center'>Изображение</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {orders.map((req, index) => (
-                            <tr key={req.id} className='table-row' onClick={() => navigate(`/orders/${req.id}`)}>
+                        {orders.map((order, index) => (
+                            <tr key={order.id} className='table-row' onClick={() => navigate(`/orders/${order.id}`)}>
                                 <td className='text-center'>{++index}</td>
-                                <td className='text-center'>{getStatusText(req.status)}</td>
-                                <td className='text-center'>{req.date_created}</td>
-                                <td className='text-center'>{req.date_formation}</td>
-                                <td className='text-center'>{req.date_complete}</td>
+                                <td className='text-center'>{getStatusText(order.status)}</td>
+                                <td className='text-center'>{ (order?.date_created.toString().replace("T", " ").replace("Z", "").substring(0, 16)) }</td>
+                                <td className='text-center'>{ order?.date_formation ? order?.date_formation.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null}</td>
+                                <td className='text-center'>{ order?.date_complete ? order?.date_complete.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null }</td>
+                                <td className='text-center'><img src={`/api/orders/${order?.id}/image/`} style={{ width: 300, height: '100%'}}/></td>
                             </tr>
                         ))}
                     </tbody>

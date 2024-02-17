@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import LoginSlice from "./slice/LoginSlice";
 import OrdersSlice from "./slice/OrdersSlice";
+import DraftSlice from "./slice/DraftSlice";
 
 const rootReducer = combineReducers({
     login: LoginSlice,
-    orders: OrdersSlice
+    orders: OrdersSlice,
+    draft: DraftSlice
 })
 
 export const store = configureStore({

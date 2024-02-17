@@ -34,6 +34,21 @@ const OneOrder: FC = () => {
         getOrder()
     }, [])
 
+    const getStatusText = (statusKey?: number) => {
+        switch (statusKey) {
+            case 1:
+                return 'Введен';
+            case 2:
+                return 'В работе';
+            case 3:
+                return 'Завершен';
+            case 4:
+                return 'Отклонен';
+            case 5:
+                return 'Удален';
+        }
+    }
+
     const breadcrumbsLinks: BreadcrumbLink[] = [
         { label: 'Заявки', url: ROUTES.ORDERS },
         { label: String(order?.id), url: `${ROUTES.ORDERS}/${id}` }
@@ -46,7 +61,7 @@ const OneOrder: FC = () => {
                 <div className="order-details">
                     <div className="order-info">
                         <h2>Информация о заказе</h2>
-                        <span>Статус: { order?.status }</span><br/>
+                        <span>Статус: { getStatusText(order?.status) }</span><br/>
                         <span>Дата создания: { (order?.date_created.toString().replace("T", " ").replace("Z", "").substring(0, 16)) }</span><br/>
                         <span>Дата формирования: { order?.date_formation ? order?.date_formation.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null}</span><br/>
                         <span>Дата завершения: { order?.date_complete ? order?.date_complete.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null }</span><br/>

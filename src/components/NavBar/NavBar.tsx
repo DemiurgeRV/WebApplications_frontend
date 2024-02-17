@@ -20,7 +20,7 @@ function Header() {
     await axios.post('/api/logout/',  {'Cookie': `session_id=${session}`})
     dispatch(logoutUser())
     localStorage.clear()
-    navigate('/filters/')
+    navigate('/')
   }
 
   return (

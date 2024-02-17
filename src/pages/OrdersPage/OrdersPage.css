@@ -66,3 +66,7 @@
     border: 2px solid #ccc;
     outline: none;
 }
+
+.date-picker:focus {
+    border-color: #f0b71d;
+}

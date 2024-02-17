@@ -16,10 +16,15 @@ const OrdersSlice = createSlice({
         },
         setEndData(state, action) {
             state.endDate = action.payload
+        },
+        resetSearch(state) {
+            state.status = '',
+            state.startDate = '',
+            state.endDate = ''
         }
     }
 })
 
-export const { setStatus, setStartData, setEndData } = OrdersSlice.actions
+export const { setStatus, setStartData, setEndData, resetSearch } = OrdersSlice.actions
 
 export default OrdersSlice.reducer

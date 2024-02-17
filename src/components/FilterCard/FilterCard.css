@@ -29,20 +29,24 @@
     color: #fff;
 }
 
-/* .button {
-    padding: 3% 15px;
+.button {
+    padding-bottom: 20px;
+    padding-left: 10px;
 }
 
-.delete_filter {
+.add_filter {
     padding: 8px 16px;
+    font-size: 16px;
     background: #fff;
     border-radius: 8px;
     text-decoration: none;
     color: black;
     transition: all .3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.delete_filter:hover {
-    transform: scale(1.1);
+.add_filter:hover {
+    transform: scale(1.05);
     background-color: #b5b5b5;
-} */
+}

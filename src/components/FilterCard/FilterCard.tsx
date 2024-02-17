@@ -1,8 +1,9 @@
 import "./FilterCard.css"
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Col } from 'react-bootstrap'
 import image from './default.jpg'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 interface Props {
     data: {
@@ -16,14 +17,30 @@ interface Props {
 }
 
 const FilterCard: FC<Props> = (props) => {
+    const navigate = useNavigate()
+
     const img = props.data.image ? `/api/filters/${props.data.id}/image/` : image
+    const auth = localStorage.getItem('is_auth')
+    const [addedToOrder, setAddedToOrder] = useState(false)
+
+    const addToOrder = async () => {     
+        await axios.post(`/api/filters/${props.data.id}/add_to_order/`)
+        setAddedToOrder(true)
+        navigate('/filters/')
+    }
     return (
         <div className='card'>
             <Link to={`./${props.data.id}/`}><Col>
                 <img src={img} className="images" />
                 <h3>{ props.data.name }</h3><br />
             </Col></Link>
-            {/* <div className="button"><a href={`http://127.0.0.1:8000/api/filters/${item.id}/delete/`} className="delete_filter">Удалить</a></div> */}
+            { auth && 
+                <div className="button">
+                    { addedToOrder ? <p>Товар добавлен в заявку</p> 
+                    :   <button onClick={addToOrder} className="add_filter">Добавить в заявку</button>
+                    }
+                </div>
+            }        
         </div>
     )
 }

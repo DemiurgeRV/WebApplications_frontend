@@ -8,11 +8,11 @@ import { RootState } from "../../store/store"
 import { setEndData, setStartData, setStatus } from "../../store/slice/OrdersSlice"
 import { useNavigate } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
-import { format } from 'date-fns';
+import { format } from 'date-fns'
 import Cookies from 'js-cookie'
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
-import { ru } from 'date-fns/locale';
+import { ru } from 'date-fns/locale'
 import "./OrdersPage.css"
 
 interface Order {

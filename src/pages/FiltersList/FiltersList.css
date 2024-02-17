@@ -16,6 +16,29 @@
     display: flex;
 }
 
+.bread-basket {
+    display: flex;
+    align-items: center;
+    padding: 0px 20px;
+    justify-content: space-between;
+}
+
+.basket {
+    text-decoration: none;
+    color: white;
+    padding-right: 6px;
+    transition: all .3s ease;
+}
+
+.basket:hover {
+    color: #f0b71d;
+}
+
+.not-basket {
+    color: rgb(148, 147, 147);
+    padding-right: 6px;
+}
+
 .top {
     display: flex;
     align-items: center;

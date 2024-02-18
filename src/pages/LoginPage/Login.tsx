@@ -12,23 +12,31 @@ const LoginPage: FC = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
+
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleLogin = async () => {
         setLoading(true)
-        const response: AxiosResponse = await axios.post(`/api/login/`, {login, password})
-        const session = Cookies.get('session_id')
-        if (session) {
-            navigate('/filters/')
-            dispatch(setUser({ role: response.data.role, login: response.data.login }))
+        try {
+            const response: AxiosResponse = await axios.post('/api/login/', {login, password})
+            const session = Cookies.get('session_id')
+            if (session) {
+                navigate('/filters/')
+                dispatch(setUser({ role: response.data.role, login: response.data.login }))
+            }
+        } catch (error) {
+            setLoading(false)
+            setError('Неверные данные пользователя. Пожалуйста, попробуйте снова.')
         }
     }
 
     return (
         <div className="auth-wrapper">
-            {loading && <Loader />}  
+            {loading && <Loader />}
+            {error && <div className="error-message">{error}</div>}  
             <Form className="login-form">
                 <h1 className="title-login">Авторизация</h1>
                 <input type="login" onChange={(event => setLogin(event.target.value))} placeholder="Логин" value={login}/>

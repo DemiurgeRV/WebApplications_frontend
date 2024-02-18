@@ -15,6 +15,7 @@ const loginSlice = createSlice({
             state.role = payload.role,
             state.login = payload.login,
             localStorage.setItem('is_auth', payload.is_auth),
+            localStorage.setItem('role', payload.role),
             localStorage.setItem('login', payload.login)
         },
         logoutUser(state) {

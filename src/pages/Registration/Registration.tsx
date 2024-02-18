@@ -15,24 +15,31 @@ const Registration: FC = () => {
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSignup = async () => {
         setLoading(true)
-        await axios.post(`/api/user/`, {first_name, last_name, email, login, password})
-        const response: AxiosResponse = await axios.post(`/api/login/`, {login, password})
-        const session = Cookies.get('session_id')
-        if (session) {
-            navigate('/filters/')
-            dispatch(setUser({ role: response.data.role, login: response.data.login }))
+        try {
+            await axios.post(`/api/user/`, {first_name, last_name, email, login, password})
+            const response: AxiosResponse = await axios.post(`/api/login/`, {login, password})
+            const session = Cookies.get('session_id')
+            if (session) {
+                navigate('/filters/')
+                dispatch(setUser({ role: response.data.role, login: response.data.login }))
+            }
+        } catch (error) {
+            setError('Введены неверные данные. Попробуйте снова')
+            setLoading(false)
         }
     }
 
     return (
         <div className="register-wrapper">  
-            {loading && <Loader />}  
+            {loading && <Loader />}
+            {error && <div className="error-message">{error}</div>}   
             <Form className="signup-form">
                 <h1 className="title-signup">Регистрация</h1>
                 <input type="input-field" onChange={(event => setName(event.target.value))} placeholder="Имя" value={first_name}/>

@@ -7,6 +7,7 @@ import { BreadcrumbLink } from '../../components/BreadCrumbs/BreadCrumbs'
 import FILTERS_MOCK from "../../modules/mock"
 import image from '../../components/FilterCard/default.jpg'
 import { Link } from "react-router-dom"
+import Loader from "../../components/LoadAnimation/LoadAnimation"
 
 interface Filter {
     id: number
@@ -19,6 +20,7 @@ interface Filter {
 
 const OneFilter: FC = () => {
     const {id} = useParams()
+    const [loading, setLoading] = useState(false)
 
     const [filter, setFilter] = useState<Filter>()
 
@@ -30,14 +32,19 @@ const OneFilter: FC = () => {
     const img = filter?.image ? `/api/filters/${filter?.id}/image/` : image
 
     useEffect(() => {
+        setLoading(true)
         fetch(`/api/filters/${id}/`)
         .then((response) => response.json())
-        .then((jsonFilter) => setFilter(jsonFilter))
+        .then((jsonFilter) => (
+            setFilter(jsonFilter),
+            setLoading(false)
+        ))
         .catch(() => (setFilter(FILTERS_MOCK.find((filter:Filter) => String(filter.id) == id))))
     }, [])
 
     return (
         <div>
+            {loading && <Loader />}  
             <BreadCrumbs crumbs={breadcrumbsLinks} />
             <div className="content-wrapper">
                 <div className="filter-details">

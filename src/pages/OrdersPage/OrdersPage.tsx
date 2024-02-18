@@ -13,6 +13,7 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { ru } from 'date-fns/locale'
 import "./OrdersPage.css"
+import Loader from '../../components/LoadAnimation/LoadAnimation'
 
 interface Order {
     id: number
@@ -25,6 +26,7 @@ interface Order {
 
 const OrdersPage: FC = () => {
     const [orders, setOrders] = useState<Order[]>([])
+    const [loading, setLoading] = useState(false)
 
     const status = useSelector((state: RootState) => state.orders.status)
     const startDate = useSelector((state: RootState) => state.orders.startDate)
@@ -54,6 +56,7 @@ const OrdersPage: FC = () => {
     }
 
     const getOrders = async () => {
+        setLoading(true)
         const response: AxiosResponse = await axios.get(`/api/orders/`, { 
             params: {
                 ...(status && { status: status }),
@@ -62,6 +65,7 @@ const OrdersPage: FC = () => {
             }, 
         })
         setOrders(response.data)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -70,6 +74,7 @@ const OrdersPage: FC = () => {
 
     return (
         <div>
+            {loading && <Loader />}  
             <BreadCrumbs crumbs={breadcrumbsLinks} />
             <div className='input-field'>
                 <InputGroup size='sm' className='shadow-sm'>

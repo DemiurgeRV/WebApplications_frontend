@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch } from "react-redux"
 import { resetDraft, setImageOrder, useImg } from "../../store/slice/DraftSlice"
+import Loader from "../../components/LoadAnimation/LoadAnimation"
 
 interface Order {
     id: number
@@ -22,6 +23,7 @@ interface Order {
 
 const OneOrder: FC = () => {
     const [order, setOrder] = useState<Order>()
+    const [loading, setLoading] = useState(false)
 
     const {id} = useParams()
     const navigate = useNavigate()
@@ -31,8 +33,10 @@ const OneOrder: FC = () => {
     image ? formData.append('image', image) : null
 
     const getOrder = async () => {
+        setLoading(true)
         const response = await axios.get(`/api/orders/${id}`)
         setOrder(response.data)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -62,7 +66,8 @@ const OneOrder: FC = () => {
         }
     };
 
-    const formOrder = async () => {     
+    const formOrder = async () => {   
+        setLoading(true)  
         await axios.put(`/api/orders/${order?.id}/update_status_owner/`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -88,6 +93,7 @@ const OneOrder: FC = () => {
 
     return (
         <div>
+            {loading && <Loader />}  
             <BreadCrumbs crumbs={breadcrumbsLinks} />
             <div className="order-wrapper">
                 <div className="order-details">

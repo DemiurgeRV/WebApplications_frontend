@@ -6,6 +6,7 @@ import "./Registration.css"
 import { useDispatch } from "react-redux"
 import { setUser } from "../../store/slice/LoginSlice"
 import { useNavigate } from "react-router-dom"
+import Loader from "../../components/LoadAnimation/LoadAnimation"
 
 const Registration: FC = () => {
     const [first_name, setName] = useState('')
@@ -13,11 +14,13 @@ const Registration: FC = () => {
     const [email, setEmail] = useState('')
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const handleSignup = async () => {
+        setLoading(true)
         await axios.post(`/api/user/`, {first_name, last_name, email, login, password})
         const response: AxiosResponse = await axios.post(`/api/login/`, {login, password})
         const session = Cookies.get('session_id')
@@ -29,6 +32,7 @@ const Registration: FC = () => {
 
     return (
         <div className="register-wrapper">  
+            {loading && <Loader />}  
             <Form className="signup-form">
                 <h1 className="title-signup">Регистрация</h1>
                 <input type="input-field" onChange={(event => setName(event.target.value))} placeholder="Имя" value={first_name}/>

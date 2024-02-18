@@ -10,6 +10,7 @@ import { BreadcrumbLink } from '../../components/BreadCrumbs/BreadCrumbs'
 import FILTERS_MOCK from '../../modules/mock'
 import { Link } from 'react-router-dom'
 import { useBasket } from '../../store/slice/DraftSlice'
+import Loader from '../../components/LoadAnimation/LoadAnimation'
 
 const FiltersList: FC = () => {
     const [searchFilter, setSearchFilter] = useState('')
@@ -17,16 +18,19 @@ const FiltersList: FC = () => {
     const [isMock, setIsMock] = useState(false)
     const [draft, setDraft] = useState(0)
     const activeBasket = useBasket()
+    const [loading, setLoading] = useState(false)
     const breadcrumbsLinks: BreadcrumbLink[] = [
         { label: 'Фильтры', url: ROUTES.FILTERS },
     ]
 
     useEffect(() => {
+        setLoading(true)
         fetch(`/api/filters/`)
         .then((response) => response.json())
         .then((jsonFilters) => (
             setFilters(jsonFilters.filters),
-            setDraft(jsonFilters.draft_order)
+            setDraft(jsonFilters.draft_order),
+            setLoading(false)
         ))
         .catch(() => {
             setIsMock(true);
@@ -64,6 +68,7 @@ const FiltersList: FC = () => {
 
     return (
         <div>
+            {loading && <Loader />}
             <div className='bread-basket'>
                 <BreadCrumbs crumbs={breadcrumbsLinks} />
                 {activeBasket == true || draft != null ? (

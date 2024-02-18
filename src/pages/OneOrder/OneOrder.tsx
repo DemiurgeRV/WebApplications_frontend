@@ -8,7 +8,7 @@ import axios from "axios"
 import { Link } from "react-router-dom"
 import { Table } from 'react-bootstrap'
 import { useDispatch } from "react-redux"
-import { setImageOrder, useImg } from "../../store/slice/DraftSlice"
+import { resetDraft, setImageOrder, useImg } from "../../store/slice/DraftSlice"
 
 interface Order {
     id: number
@@ -72,6 +72,7 @@ const OneOrder: FC = () => {
 
     const deleteOrder = async () => {     
         await axios.delete(`/api/orders/${order?.id}/delete/`)
+        dispatch(resetDraft())
         navigate('/filters/')
     }
 

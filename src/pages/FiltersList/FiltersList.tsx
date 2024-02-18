@@ -9,12 +9,14 @@ import { ROUTES } from '../../Routes'
 import { BreadcrumbLink } from '../../components/BreadCrumbs/BreadCrumbs'
 import FILTERS_MOCK from '../../modules/mock'
 import { Link } from 'react-router-dom'
+import { useBasket } from '../../store/slice/DraftSlice'
 
 const FiltersList: FC = () => {
     const [searchFilter, setSearchFilter] = useState('')
     const [filters, setFilters] = useState<Filter[]>([])
     const [isMock, setIsMock] = useState(false)
     const [draft, setDraft] = useState(0)
+    const activeBasket = useBasket()
     const breadcrumbsLinks: BreadcrumbLink[] = [
         { label: 'Фильтры', url: ROUTES.FILTERS },
     ]
@@ -31,6 +33,14 @@ const FiltersList: FC = () => {
             setFilters(FILTERS_MOCK)
         })
     },[])
+
+    useEffect(() => {
+        fetch(`/api/filters/`)
+        .then((response) => response.json())
+        .then((jsonFilters) => (
+            setDraft(jsonFilters.draft_order)
+        ))
+    }, [activeBasket])
 
     const handleSearch = async () => {
         const response = await fetch(`/api/filters/?search-filter=${searchFilter}`)
@@ -56,9 +66,9 @@ const FiltersList: FC = () => {
         <div>
             <div className='bread-basket'>
                 <BreadCrumbs crumbs={breadcrumbsLinks} />
-                {draft == null ? (
-                    <span className='not-basket'>Текущий заказ</span>
-                ) : (<Link to={`/orders/${draft}`} className='basket'>Текущий заказ</Link>)}
+                {activeBasket == true || draft != null ? (
+                    <Link to={`/orders/${draft}`} className='basket'>Текущий заказ</Link>
+                ) : (<span className='not-basket'>Текущий заказ</span>)}
             </div>
             <div className="content-wrapper">
                 <div className='cards-wrapper'>

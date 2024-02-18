@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import OneOrder from "./pages/OneOrder/OneOrder";
+import Registration from "./pages/Registration/Registration";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path={ROUTES.FILTERS} element={<FiltersList />} />
             <Route path={`${ROUTES.FILTERS}/:id`} element={<OneFilter />} />
             <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+            <Route path={ROUTES.SIGNUP} element={<Registration />} />
             <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
             <Route path={`${ROUTES.ORDERS}/:id`} element={<OneOrder />} />
           </Routes>

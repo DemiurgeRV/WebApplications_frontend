@@ -5,12 +5,21 @@ import { RootState } from "../store";
 const DraftSlice = createSlice({
     name: "draft",
     initialState: {
-        image: null
+        image: null,
+        is_create: false,
     },
     reducers: {
         setImageOrder(state, action) {
             state.image = action.payload
-            console.log('slice', state.image)
+        },
+        setBasket(state) {
+            state.is_create = true
+            console.log('setBasket')
+        },
+        resetDraft(state) {
+            state.is_create = false
+            state.image = null
+            console.log('resetDraft')
         }
     }
 })
@@ -18,6 +27,9 @@ const DraftSlice = createSlice({
 export const useImg = () => 
     useSelector((state: RootState) => state.draft.image)
 
-export const { setImageOrder } = DraftSlice.actions
+export const useBasket = () =>
+    useSelector((state: RootState) => state.draft.is_create)
+
+export const { setImageOrder, setBasket, resetDraft } = DraftSlice.actions
 
 export default DraftSlice.reducer

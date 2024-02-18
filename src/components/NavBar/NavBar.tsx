@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from "../../store/slice/LoginSlice"
 import Cookies from 'js-cookie';
+import { resetDraft } from '../../store/slice/DraftSlice';
 
 
 function Header() {
@@ -19,6 +20,7 @@ function Header() {
   const logout = async () => {
     await axios.post('/api/logout/',  {'Cookie': `session_id=${session}`})
     dispatch(logoutUser())
+    dispatch(resetDraft())
     localStorage.clear()
     navigate('/')
   }
@@ -35,8 +37,12 @@ function Header() {
                 <div style={{position: 'absolute', right: 20}}>
                   <h4>{login} |<button onClick={logout} className="exit">Выйти</button></h4> 
                 </div>
-              ) : (              
-                <Link to="/login" className='link' style={{position: 'absolute', right: 20}}>Войти</Link>
+              ) : (   
+                <div className='sign' style={{position: 'absolute', right: 20}}>          
+                  <Link to="/login" className='link'>Войти</Link>
+                  <span> | </span>
+                  <Link to="/signup" className='link'>Регистрация</Link>
+                </div> 
               )
             }
           </Nav>

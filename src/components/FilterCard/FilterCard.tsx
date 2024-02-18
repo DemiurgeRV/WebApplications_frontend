@@ -4,6 +4,8 @@ import { Col } from 'react-bootstrap'
 import image from './default.jpg'
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
+import { useDispatch } from "react-redux"
+import { setBasket } from "../../store/slice/DraftSlice"
 
 interface Props {
     data: {
@@ -18,6 +20,7 @@ interface Props {
 
 const FilterCard: FC<Props> = (props) => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const img = props.data.image ? `/api/filters/${props.data.id}/image/` : image
     const auth = localStorage.getItem('is_auth')
@@ -26,6 +29,7 @@ const FilterCard: FC<Props> = (props) => {
     const addToOrder = async () => {     
         await axios.post(`/api/filters/${props.data.id}/add_to_order/`)
         setAddedToOrder(true)
+        dispatch(setBasket())
         navigate('/filters/')
     }
     return (

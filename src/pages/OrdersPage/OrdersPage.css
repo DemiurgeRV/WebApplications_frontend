@@ -41,9 +41,10 @@
     align-items: center;
 }
 
-.status {
+.text-input-group {
     padding: 10px;
     font-size: 18px;
+    margin-bottom: 20px;
 }
 
 .select-status {
@@ -69,4 +70,21 @@
 
 .date-picker:focus {
     border-color: #f0b71d;
+}
+
+.search {
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: #f0b71d;
+    color: #fff;
+    transition: transform .3s ease;
+    padding: 6px 15px;
+    font-size: 16px;
+}
+
+.search:hover {
+    transform: scale(1.1);
+    background-color: #d69d20;
 }

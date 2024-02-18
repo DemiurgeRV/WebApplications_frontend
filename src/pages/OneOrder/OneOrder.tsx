@@ -87,7 +87,7 @@ const OneOrder: FC = () => {
     }
 
     const breadcrumbsLinks: BreadcrumbLink[] = [
-        { label: 'Заявки', url: ROUTES.ORDERS },
+        { label: 'Заказы', url: ROUTES.ORDERS },
         { label: String(order?.id), url: `${ROUTES.ORDERS}/${id}` }
     ]
 

@@ -36,6 +36,8 @@ interface Order {
 const OrdersPage: FC = () => {
     const [orders, setOrders] = useState<Order[]>([])
     const [loading, setLoading] = useState(false)
+    const [owner, setOwner] = useState('')
+    const [initialOrders, setInitialOrders] = useState<Order[]>([])
 
     const status = useSelector((state: RootState) => state.orders.status)
     const startDate = useSelector((state: RootState) => state.orders.startDate)
@@ -47,8 +49,14 @@ const OrdersPage: FC = () => {
     const navigate = useNavigate()
 
     const breadcrumbsLinks: BreadcrumbLink[] = [
-        { label: 'Заявки', url: ROUTES.ORDERS },
+        { label: 'Заказы', url: ROUTES.ORDERS },
     ]
+
+    const handleSearchOwner = () => {
+        const searchOwner = owner.toLowerCase()
+        const filteredOrders = initialOrders.filter(order => order.owner.login.toLowerCase().includes(searchOwner));
+        setOrders(filteredOrders)
+    }
 
     const getStatusText = (statusKey: number) => {
         switch (statusKey) {
@@ -76,6 +84,7 @@ const OrdersPage: FC = () => {
         })
         setOrders(response.data)
         setLoading(false)
+        setInitialOrders(response.data)
     }
 
     useEffect(() => {
@@ -88,7 +97,7 @@ const OrdersPage: FC = () => {
             <BreadCrumbs crumbs={breadcrumbsLinks} />
             <div className='input-field'>
                 <InputGroup size='sm' className='shadow-sm'>
-                    <InputGroup.Text className='status'>Статус</InputGroup.Text>
+                    <InputGroup.Text className='text-input-group'>Статус</InputGroup.Text>
                     <Form.Select
                         className='select-status'
                         defaultValue={status}
@@ -118,6 +127,11 @@ const OrdersPage: FC = () => {
                     locale={ru}
                 />
             </div>
+            <InputGroup className='text-input-group'>
+                <InputGroup.Text>Создатель</InputGroup.Text>
+                <input className='date-picker' placeholder="Введите логин" value={owner} onChange={(event => setOwner(event.target.value))} />
+                <button className='search' onClick={handleSearchOwner}>Поиск</button>
+            </InputGroup>
             <div className='orders'>
                 <Table striped bordered hover className="custom-table">
                     <thead>

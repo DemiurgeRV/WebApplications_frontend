@@ -39,7 +39,7 @@ const Registration: FC = () => {
                 <input type="input-field" onChange={(event => setLastname(event.target.value))} placeholder="Фаимилия" value={last_name}/>
                 <input type="input-field" onChange={(event => setEmail(event.target.value))} placeholder="Почта" value={email}/>
                 <input type="input-field" onChange={(event => setLogin(event.target.value))} placeholder="Логин" value={login}/>
-                <input type="input-field" onChange={(event => setPassword(event.target.value))} placeholder="Пароль" value={password}/>
+                <input type="password" onChange={(event => setPassword(event.target.value))} placeholder="Пароль" value={password}/>
                 <button className="btn-signup" type="button" onClick={handleSignup}>Зарегистрироваться</button>
             </Form>
         </div>

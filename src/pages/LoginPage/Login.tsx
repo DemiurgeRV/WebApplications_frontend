@@ -32,7 +32,7 @@ const LoginPage: FC = () => {
             <Form className="login-form">
                 <h1 className="title-login">Авторизация</h1>
                 <input type="login" onChange={(event => setLogin(event.target.value))} placeholder="Логин" value={login}/>
-                <input type="password mt-2" onChange={(event => setPassword(event.target.value))} placeholder="Пароль" value={password}/>
+                <input type="password" onChange={(event => setPassword(event.target.value))} placeholder="Пароль" value={password}/>
                 <button className="btn-login" type="button" onClick={handleLogin}>Войти</button>
             </Form>
         </div>

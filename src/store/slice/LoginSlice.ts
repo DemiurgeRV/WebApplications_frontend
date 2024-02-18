@@ -20,7 +20,8 @@ const loginSlice = createSlice({
         },
         logoutUser(state) {
             state.is_auth = false,
-            state.role = false
+            state.role = false,
+            state.login = ''
         }
     }
 })  

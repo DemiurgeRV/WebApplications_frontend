@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useDispatch } from "react-redux"
 import { setBasket } from "../../store/slice/DraftSlice"
-import { useRole } from "../../store/slice/LoginSlice"
 
 interface Props {
     data: {
@@ -25,7 +24,7 @@ const FilterCard: FC<Props> = (props) => {
 
     const img = props.data.image ? `/api/filters/${props.data.id}/image/` : image
     const auth = localStorage.getItem('is_auth')
-    const role = useRole()
+    const role = localStorage.getItem('role')
     const [addedToOrder, setAddedToOrder] = useState(false)
     const [error, setError] = useState('')
 
@@ -39,29 +38,19 @@ const FilterCard: FC<Props> = (props) => {
             setError('Товар уже добавлен в заявку')
         }  
     }
-    const deleteFilter = async () => {
-        await axios.post(`api/filters/${props.data.id}/delete/`)
-    }
     return (
         <div className='card'>
             <Link to={`./${props.data.id}/`}><Col>
                 <img src={img} className="images" />
-                <h3>{ props.data.name }</h3><br />
+                <h3>{ props.data.name }</h3><br/>
             </Col></Link>
-            { auth && !role &&
+            { auth && (role == 'false') &&
                 <div className="button">
                     { addedToOrder || error ? <p>Фильтр добавлен в заявку</p> 
-                    :   <button onClick={addToOrder} className="add_filter">Добавить в заявку</button>
+                    :   <button onClick={addToOrder} className="add_filter">Добавить в заказы</button>
                     }
                 </div>
             }    
-            { auth && role &&
-                <div className="button">
-                    { addedToOrder ? <p>Товар добавлен в заявку</p> 
-                    :   <button onClick={deleteFilter} className="add_filter">Удалить</button>
-                    }
-                </div>
-            }     
         </div>
     )
 }

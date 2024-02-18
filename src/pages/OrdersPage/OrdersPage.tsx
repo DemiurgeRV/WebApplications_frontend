@@ -21,7 +21,16 @@ interface Order {
     date_created: string
     date_formation: string | null
     date_complete: string | null
-    moderator: string | null
+    owner: {
+        id: number
+        login: string
+        email: string
+    }
+    moderator: {
+        id: number
+        login: string
+        email: string
+    } | null
 }
 
 const OrdersPage: FC = () => {
@@ -31,6 +40,7 @@ const OrdersPage: FC = () => {
     const status = useSelector((state: RootState) => state.orders.status)
     const startDate = useSelector((state: RootState) => state.orders.startDate)
     const endDate = useSelector((state: RootState) => state.orders.endDate)
+    const role = localStorage.getItem('role')
 
 
     const dispatch = useDispatch()
@@ -118,6 +128,8 @@ const OrdersPage: FC = () => {
                             <th className='text-center'>Дата формирования</th>
                             <th className='text-center'>Дата завершения</th>
                             <th className='text-center'>Изображение</th>
+                            { (role == 'true') && <th className='text-center'>Создатель</th> }
+                            { (role == 'true') && <th className='text-center'>Модератор</th> }
                         </tr>
                     </thead>
                     <tbody>
@@ -129,6 +141,8 @@ const OrdersPage: FC = () => {
                                 <td className='text-center'>{ order?.date_formation ? order?.date_formation.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null}</td>
                                 <td className='text-center'>{ order?.date_complete ? order?.date_complete.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null }</td>
                                 <td className='text-center'><img src={`/api/orders/${order?.id}/image/`} style={{ width: 300, height: '100%'}}/></td>
+                                { (role == 'true') && <td className='text-center'>{ order.owner.login }</td> }
+                                { (role == 'true') && <td className='text-center'>{ order.moderator?.login }</td> }
                             </tr>
                         ))}
                     </tbody>

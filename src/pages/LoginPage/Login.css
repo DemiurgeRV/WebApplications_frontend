@@ -37,12 +37,11 @@
 
 .btn-login {
     margin-top: 14px;
+    font-size: 16px;
     border-radius: 18px;
     background: #f0b71d;;
     color:#ffffff;
-    width: 80px;
-    padding: 3px 3px 3px 3px;
-    height: 32px;
+    padding: 8px 20px;
     outline: none;
     border: none;
     cursor: pointer;

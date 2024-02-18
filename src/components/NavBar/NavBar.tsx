@@ -31,8 +31,7 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Link to="./filters" className='link'>Фильтры</Link>
-            <Link to="/orders" className='link'>Заявки</Link>
-            <Link to="/profile" className='link'>Личный кабинет</Link>
+            { session && <Link to="/orders" className='link'>Заказы</Link> }
             { session ? (
                 <div style={{position: 'absolute', right: 20}}>
                   <h4>{login} |<button onClick={logout} className="exit">Выйти</button></h4> 

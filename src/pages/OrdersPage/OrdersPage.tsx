@@ -31,6 +31,7 @@ interface Order {
         login: string
         email: string
     } | null
+    image: string
 }
 
 const OrdersPage: FC = () => {
@@ -79,7 +80,6 @@ const OrdersPage: FC = () => {
     }
 
     const getOrders = async () => {
-        setLoading(true)
         const response: AxiosResponse = await axios.get(`/api/orders/`, { 
             params: {
                 ...(status && { status: status }),
@@ -88,13 +88,23 @@ const OrdersPage: FC = () => {
             }, 
         })
         setOrders(response.data)
-        setLoading(false)
         setInitialOrders(response.data)
+        setLoading(false)
     }
 
     useEffect(() => {
         getOrders()
+        const intervalId = setInterval(() => {
+            getOrders()
+        }, 5000)
+        return () => {
+            clearInterval(intervalId)
+        }
     }, [dispatch, status, startDate, endDate])
+
+    useEffect(() => {
+        setLoading(true)
+    },[])
 
     return (
         <div>
@@ -160,7 +170,7 @@ const OrdersPage: FC = () => {
                                 <td className='text-center'>{ (order?.date_created.toString().replace("T", " ").replace("Z", "").substring(0, 16)) }</td>
                                 <td className='text-center'>{ order?.date_formation ? order?.date_formation.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null}</td>
                                 <td className='text-center'>{ order?.date_complete ? order?.date_complete.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null }</td>
-                                <td className='text-center'><img src={`/api/orders/${order?.id}/image/`} style={{ width: 300, height: '100%'}}/></td>
+                                <td className='text-center'><img src={order?.image} style={{ width: 300, height: '100%'}}/></td>
                                 { (role == 'true') && <td className='text-center'>{ order.owner.login }</td> }
                                 { (role == 'true') && <td className='text-center'>{ order.moderator?.login }</td> }
                                 { (role == 'true') && <td className='text-center'> { (order.status == 2) && 

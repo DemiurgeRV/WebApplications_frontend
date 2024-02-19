@@ -17,7 +17,16 @@ interface Order {
     date_created: string
     date_formation: string | null
     date_complete: string | null
-    moderator: string | null
+    owner: {
+        id: number
+        login: string
+        email: string
+    }
+    moderator: {
+        id: number
+        login: string
+        email: string
+    } | null
     Filters_in_Order: Filter[]
 }
 
@@ -30,6 +39,7 @@ const OneOrder: FC = () => {
     const dispatch = useDispatch()
     const image: File | null = useImg()
     const formData = new FormData()
+    const role = localStorage.getItem('role')
     image ? formData.append('image', image) : null
 
     const getOrder = async () => {
@@ -86,6 +96,11 @@ const OneOrder: FC = () => {
         getOrder()
     }
 
+    const moderStatusOrder = async (choice: number, order_id: number) => {
+        await axios.put(`/api/orders/${order_id}/update_status_moderator/`, {status: choice})
+        navigate('/orders/')
+    }
+
     const breadcrumbsLinks: BreadcrumbLink[] = [
         { label: 'Заказы', url: ROUTES.ORDERS },
         { label: String(order?.id), url: `${ROUTES.ORDERS}/${id}` }
@@ -103,6 +118,8 @@ const OneOrder: FC = () => {
                         <span>Дата создания: { (order?.date_created.toString().replace("T", " ").replace("Z", "").substring(0, 16)) }</span><br/><br/>
                         <span>Дата формирования: { order?.date_formation ? order?.date_formation.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null}</span><br/><br/>
                         <span>Дата завершения: { order?.date_complete ? order?.date_complete.toString().replace("T", " ").replace("Z", "").substring(0, 16) : null }</span><br/><br/>
+                        { (role == 'true') && <span className='text-center'>Создатель: { order?.owner.login }</span> }<br/><br/>
+                        { (role == 'true') && <span className='text-center'>Модератор: { order?.moderator?.login }</span> }<br/><br/>
                         {order?.status != 1 ? <span>Фотография: <p><img src={`/api/orders/${order?.id}/image/`} style={{ width: 500, height: '100%'}}/></p></span> : (
                             <span>Фотография для обработки: <input type="file" onChange={handleFileChange}/></span>
                         )}
@@ -110,6 +127,8 @@ const OneOrder: FC = () => {
                     <div className="block-button">
                         {order?.status == 1 && <button onClick={formOrder} className="form-order">Сформировать</button>}
                         {order?.status == 1 && <button onClick={deleteOrder} className="delete-order">Удалить</button>}
+                        { (role == 'true') && (order?.status == 2) && <button className="form-order" onClick={() => { moderStatusOrder(3, order.id)}}>Подтвердить</button>}
+                        { (role == 'true') && (order?.status == 2) && <button className="delete-order" onClick={() => { moderStatusOrder(4, order.id)}}>Отклонить</button>}
                     </div>
                     <Link to={`../orders`} className="to-orders">К заявкам</Link>
                 </div>

@@ -35,6 +35,7 @@ const FiltersList: FC = () => {
         .catch(() => {
             setIsMock(true);
             setFilters(FILTERS_MOCK)
+            setLoading(false)
         })
     },[])
 
@@ -71,7 +72,7 @@ const FiltersList: FC = () => {
             {loading && <Loader />}
             <div className='bread-basket'>
                 <BreadCrumbs crumbs={breadcrumbsLinks} />
-                {activeBasket == true || draft != null ? (
+                {(activeBasket == true || draft != null) && !isMock ? (
                     <Link to={`/orders/${draft}`} className='basket'>Текущий заказ</Link>
                 ) : (<span className='not-basket'>Текущий заказ</span>)}
             </div>

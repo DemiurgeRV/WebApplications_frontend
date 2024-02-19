@@ -14,12 +14,10 @@ const DraftSlice = createSlice({
         },
         setBasket(state) {
             state.is_create = true
-            console.log('setBasket')
         },
         resetDraft(state) {
             state.is_create = false
             state.image = null
-            console.log('resetDraft')
         }
     }
 })

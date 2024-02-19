@@ -39,7 +39,10 @@ const OneFilter: FC = () => {
             setFilter(jsonFilter),
             setLoading(false)
         ))
-        .catch(() => (setFilter(FILTERS_MOCK.find((filter:Filter) => String(filter.id) == id))))
+        .catch(() => (
+            setFilter(FILTERS_MOCK.find((filter:Filter) => String(filter.id) == id)),
+            setLoading(false)
+        ))
     }, [])
 
     return (

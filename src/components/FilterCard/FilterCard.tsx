@@ -23,8 +23,10 @@ const FilterCard: FC<Props> = (props) => {
     const dispatch = useDispatch()
 
     const img = props.data.image ? `/api/filters/${props.data.id}/image/` : image
-    const auth = localStorage.getItem('is_auth')
+    const is_auth = localStorage.getItem('is_auth')
     const role = localStorage.getItem('role')
+    console.log(is_auth)
+    console.log(role)
     const [addedToOrder, setAddedToOrder] = useState(false)
     const [error, setError] = useState('')
 
@@ -44,7 +46,7 @@ const FilterCard: FC<Props> = (props) => {
                 <img src={img} className="images" />
                 <h3>{ props.data.name }</h3><br/>
             </Col></Link>
-            { auth && (role == 'false') &&
+            { (is_auth == 'true') && (role == 'false') &&
                 <div className="button">
                     { addedToOrder || error ? <p>Фильтр добавлен в заказ</p> 
                     :   <button onClick={addToOrder} className="add_filter">Добавить в заказ</button>

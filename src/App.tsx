@@ -9,6 +9,7 @@ import { store } from "./store/store";
 import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import OneOrder from "./pages/OneOrder/OneOrder";
 import Registration from "./pages/Registration/Registration";
+import ModerFilters from "./pages/ModerFilters/ModerFilters";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path={ROUTES.SIGNUP} element={<Registration />} />
             <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
             <Route path={`${ROUTES.ORDERS}/:id`} element={<OneOrder />} />
+            <Route path={`${ROUTES.MODERFILTERS}`} element={<ModerFilters />} />
           </Routes>
         </BrowserRouter>
       </Provider>

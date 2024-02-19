@@ -1,0 +1,31 @@
+.edit-filter {
+    padding: 8px 16px;
+    font-size: 16px;
+    text-decoration: none;
+    background: #0dd51a;
+    border-radius: 8px;
+    color: white;
+    transition: all .3s ease;
+    border: none;
+}
+
+.edit-filter:hover {
+    background-color: #0db118;
+}
+
+.delete-filter {
+    padding: 8px 16px;
+    font-size: 16px;
+    background: #d60b0b;
+    border-radius: 8px;
+    color: white;
+    transition: all .3s ease;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.delete-filter:hover {
+    background-color: rgb(181, 16, 16)
+}

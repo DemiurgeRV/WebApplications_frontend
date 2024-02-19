@@ -12,6 +12,7 @@ import { resetDraft } from '../../store/slice/DraftSlice';
 
 function Header() {
   const login = localStorage.getItem('login')
+  const role = localStorage.getItem('role')
   const session = Cookies.get('session_id')
 
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ function Header() {
           <Nav className="me-auto">
             <Link to="./filters" className='link'>Фильтры</Link>
             { session && <Link to="/orders" className='link'>Заказы</Link> }
+            { (role == 'true') && <Link to="/filters/moder" className='link'>Управление Фильтрами</Link>}
             { session ? (
                 <div style={{position: 'absolute', right: 20}}>
                   <h4>{login} |<button onClick={logout} className="exit">Выйти</button></h4> 

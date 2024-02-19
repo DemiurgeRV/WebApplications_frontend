@@ -3,5 +3,6 @@ export const ROUTES = {
     FILTERS: "/filters",
     LOGIN: "/login",
     SIGNUP: "/signup",
-    ORDERS: "/orders"
+    ORDERS: "/orders",
+    MODERFILTERS: "/filters/moder"
   }

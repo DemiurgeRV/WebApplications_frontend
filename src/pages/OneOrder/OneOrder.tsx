@@ -72,9 +72,8 @@ const OneOrder: FC = () => {
         const file = e.target.files && e.target.files[0];
         if (file) {
             dispatch(setImageOrder(file));
-            console.log(file)
         }
-    };
+    }
 
     const formOrder = async () => {   
         setLoading(true)  

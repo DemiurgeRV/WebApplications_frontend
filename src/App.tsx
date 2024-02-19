@@ -10,6 +10,7 @@ import OrdersPage from "./pages/OrdersPage/OrdersPage";
 import OneOrder from "./pages/OneOrder/OneOrder";
 import Registration from "./pages/Registration/Registration";
 import ModerFilters from "./pages/ModerFilters/ModerFilters";
+import OneFilterModer from "./pages/OneFilterModer/OneFilterModer";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path={ROUTES.ORDERS} element={<OrdersPage />} />
             <Route path={`${ROUTES.ORDERS}/:id`} element={<OneOrder />} />
             <Route path={`${ROUTES.MODERFILTERS}`} element={<ModerFilters />} />
+            <Route path={`${ROUTES.MODERFILTERS}/:id`} element={<OneFilterModer />} />
           </Routes>
         </BrowserRouter>
       </Provider>

@@ -11,6 +11,13 @@ import "./ModerFilters.css"
 const ModerFilters: FC = () => {
     const [loading, setLoading] = useState(false)
     const [filters, setFilters] = useState<Filter[]>([])
+    const [searchFilter, setSearchFilter] = useState('')
+
+    const handleSearch = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const response = await axios.get('/api/filters/', { params: {'search-filter': searchFilter} })
+        setFilters(response.data.filters)
+    }
 
     const deleteFilter = async (id:number) => {
         await axios.delete(`/api/filters/${id}/delete/`)
@@ -39,6 +46,22 @@ const ModerFilters: FC = () => {
         <div>
             {loading && <Loader />}  
             <BreadCrumbs crumbs={breadcrumbsLinks} />
+            <form onSubmit={handleSearch}>
+                <input 
+                    type="text" 
+                    name="search-filter" 
+                    placeholder="Поиск" 
+                    autoComplete="off" 
+                    id="search-filter" 
+                    value={searchFilter} 
+                    onChange={(event => setSearchFilter(event.target.value))}
+                />
+                <input 
+                    type="submit" 
+                    value="Найти" 
+                    id="search-button"
+                />
+            </form>
             <Table className='table'>
                 <thead>
                     <tr >
@@ -59,7 +82,7 @@ const ModerFilters: FC = () => {
                             }}/></td>
                             <td>{item.name}</td>
                             <td>{item.price}₽</td>
-                            <td><Link className="edit-filter" to={`filters/${item.id}/moder`}>Редактировать</Link><br/>
+                            <td><Link className="edit-filter" to={`/filters/moder/${item.id}`}>Редактировать</Link><br/>
                             <button className="delete-filter" onClick={() => deleteFilter(item.id)}>Удалить</button></td>
                         </tr>
                     ))}

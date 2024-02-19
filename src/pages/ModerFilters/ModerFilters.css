@@ -29,3 +29,20 @@
 .delete-filter:hover {
     background-color: rgb(181, 16, 16)
 }
+
+.new-filter {
+    text-decoration: none;
+    color: white;
+    border-radius: 15px;
+    outline: none;
+    border: none;
+    background: #f0b71d;
+    padding: 6px 15px;
+    font-size: 16px;
+    transition: transform .3s ease;
+}
+
+.new-filter:hover {
+    transform: scale(1.1);
+    background-color: #d69d20;
+}

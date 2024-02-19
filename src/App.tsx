@@ -27,6 +27,7 @@ function App() {
             <Route path={`${ROUTES.ORDERS}/:id`} element={<OneOrder />} />
             <Route path={`${ROUTES.MODERFILTERS}`} element={<ModerFilters />} />
             <Route path={`${ROUTES.MODERFILTERS}/:id`} element={<OneFilterModer />} />
+            <Route path={`${ROUTES.MODERFILTERS}/new`} element={<OneFilterModer />} />
           </Routes>
         </BrowserRouter>
       </Provider>

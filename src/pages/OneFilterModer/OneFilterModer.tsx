@@ -15,7 +15,8 @@ const OneFilterModer: FC = () => {
     const [name, setName] = useState(filter?.name)
     const [price, setPrice] = useState(filter?.price)
     const [description, setDescription] = useState(filter?.description)
-    const [imageFilter, setImageFilter] = useState<File | undefined>(undefined);
+    const [imageFilter, setImageFilter] = useState<File | undefined>(undefined)
+    const [newFilter, setNewFilter] = useState(false)
 
     const img = filter?.image ? `/api/filters/${filter?.id}/image/` : image
     const formData = new FormData()
@@ -28,16 +29,30 @@ const OneFilterModer: FC = () => {
     ]
 
     const saveChanges = async() => {
-        await axios.put(`/api/filters/${id}/update/`, { 
-            'name': name,
-            'description': description,
-            'price': price
-        })
-        if(imageFilter) {
-            formData.append('image', imageFilter)
-            await axios.put(`/api/filters/${id}/image/update/`, formData)
+        if(!newFilter) {
+            await axios.put(`/api/filters/${id}/update/`, { 
+                'name': name,
+                'description': description,
+                'price': price
+            })
+            if(imageFilter) {
+                formData.append('image', imageFilter)
+                await axios.put(`/api/filters/${id}/image/update/`, formData)
+            }
+            navigate(`/filters/moder/`)
         }
-        navigate(`/filters/moder/`)
+        else {
+            await axios.post(`/api/filters/create/`, { 
+                'name': name,
+                'description': description,
+                'price': price
+            })
+            if(imageFilter) {
+                formData.append('image', imageFilter)
+                await axios.put(`/api/filters/${id}/image/update/`, formData)
+            }
+            navigate(`/filters/moder/`)
+        }
     }
 
     const handleFileChange = (e: ChangeEvent<HTMLInputElement> ) => {
@@ -53,6 +68,10 @@ const OneFilterModer: FC = () => {
     }
 
     useEffect(() => {
+        if (!id) {
+            setNewFilter(true)
+            return
+        }
         getFilter()
     }, [])
 

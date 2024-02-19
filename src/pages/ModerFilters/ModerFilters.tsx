@@ -46,22 +46,25 @@ const ModerFilters: FC = () => {
         <div>
             {loading && <Loader />}  
             <BreadCrumbs crumbs={breadcrumbsLinks} />
-            <form onSubmit={handleSearch}>
-                <input 
-                    type="text" 
-                    name="search-filter" 
-                    placeholder="Поиск" 
-                    autoComplete="off" 
-                    id="search-filter" 
-                    value={searchFilter} 
-                    onChange={(event => setSearchFilter(event.target.value))}
-                />
-                <input 
-                    type="submit" 
-                    value="Найти" 
-                    id="search-button"
-                />
-            </form>
+            <div className="search-add"  style={{ display: 'flex', alignItems: 'center'}}>
+                <form onSubmit={handleSearch}>
+                    <input 
+                        type="text" 
+                        name="search-filter" 
+                        placeholder="Поиск" 
+                        autoComplete="off" 
+                        id="search-filter" 
+                        value={searchFilter} 
+                        onChange={(event => setSearchFilter(event.target.value))}
+                    />
+                    <input 
+                        type="submit" 
+                        value="Найти" 
+                        id="search-button"
+                    />
+                </form>
+                <Link className="new-filter" to={`/filters/moder/new`}>Добавить</Link>
+            </div>
             <Table className='table'>
                 <thead>
                     <tr >

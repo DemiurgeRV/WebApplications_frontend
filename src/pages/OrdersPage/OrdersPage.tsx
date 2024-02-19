@@ -142,11 +142,13 @@ const OrdersPage: FC = () => {
                     locale={ru}
                 />
             </div>
+            { (role == 'true') &&
             <InputGroup className='text-input-group'>
                 <InputGroup.Text>Создатель</InputGroup.Text>
                 <input className='date-picker' placeholder="Введите логин" value={owner} onChange={(event => setOwner(event.target.value))} />
                 <button className='search' onClick={handleSearchOwner}>Поиск</button>
             </InputGroup>
+            }
             <div className='orders'>
                 <Table striped bordered hover className="custom-table">
                     <thead>

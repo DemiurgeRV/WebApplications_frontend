@@ -58,6 +58,11 @@ const OrdersPage: FC = () => {
         setOrders(filteredOrders)
     }
 
+    const moderStatusOrder = async (choice: number, order_id: number) => {
+        await axios.put(`/api/orders/${order_id}/update_status_moderator/`, {status: choice})
+        getOrders()
+    }
+
     const getStatusText = (statusKey: number) => {
         switch (statusKey) {
             case 1:
@@ -144,6 +149,7 @@ const OrdersPage: FC = () => {
                             <th className='text-center'>Изображение</th>
                             { (role == 'true') && <th className='text-center'>Создатель</th> }
                             { (role == 'true') && <th className='text-center'>Модератор</th> }
+                            { (role == 'true') && <th></th> }
                         </tr>
                     </thead>
                     <tbody>
@@ -157,6 +163,12 @@ const OrdersPage: FC = () => {
                                 <td className='text-center'><img src={`/api/orders/${order?.id}/image/`} style={{ width: 300, height: '100%'}}/></td>
                                 { (role == 'true') && <td className='text-center'>{ order.owner.login }</td> }
                                 { (role == 'true') && <td className='text-center'>{ order.moderator?.login }</td> }
+                                { (role == 'true') && <td className='text-center'> { (order.status == 2) && 
+                                    <div className='moder-button'>
+                                        <button className='compl-order' onClick={(e) => { e.stopPropagation(); moderStatusOrder(3, order.id)}}>Подтвердить</button><br/>
+                                        <button className='reject-order' onClick={(e) => { e.stopPropagation(); moderStatusOrder(4, order.id)}}>Отклонить</button>
+                                    </div> }
+                                </td> }
                             </tr>
                         ))}
                     </tbody>

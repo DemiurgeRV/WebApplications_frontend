@@ -35,7 +35,7 @@ const FilterCard: FC<Props> = (props) => {
             dispatch(setBasket())
             navigate('/filters/')
         } catch (error) {
-            setError('Товар уже добавлен в заявку')
+            setError('Товар уже добавлен в заказ')
         }  
     }
     return (
@@ -46,8 +46,8 @@ const FilterCard: FC<Props> = (props) => {
             </Col></Link>
             { auth && (role == 'false') &&
                 <div className="button">
-                    { addedToOrder || error ? <p>Фильтр добавлен в заявку</p> 
-                    :   <button onClick={addToOrder} className="add_filter">Добавить в заказы</button>
+                    { addedToOrder || error ? <p>Фильтр добавлен в заказ</p> 
+                    :   <button onClick={addToOrder} className="add_filter">Добавить в заказ</button>
                     }
                 </div>
             }    

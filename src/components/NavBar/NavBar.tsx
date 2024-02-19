@@ -33,7 +33,7 @@ function Header() {
           <Nav className="me-auto">
             <Link to="./filters" className='link'>Фильтры</Link>
             { session && <Link to="/orders" className='link'>Заказы</Link> }
-            { (role == 'true') && <Link to="/filters/moder" className='link'>Управление Фильтрами</Link>}
+            { session && (role == 'true') && <Link to="/filters/moder" className='link'>Управление Фильтрами</Link>}
             { session ? (
                 <div style={{position: 'absolute', right: 20}}>
                   <h4>{login} |<button onClick={logout} className="exit">Выйти</button></h4> 

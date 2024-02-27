@@ -37,14 +37,6 @@ const FiltersList: FC = () => {
             setFilters(FILTERS_MOCK)
             setLoading(false)
         })
-    },[])
-
-    useEffect(() => {
-        fetch(`/api/filters/`)
-        .then((response) => response.json())
-        .then((jsonFilters) => (
-            setDraft(jsonFilters.draft_order)
-        ))
     }, [activeBasket])
 
     const handleSearch = async () => {

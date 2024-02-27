@@ -81,6 +81,7 @@ const OneOrder: FC = () => {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }})
+        dispatch(resetDraft())
         navigate('/orders/')
     }
 

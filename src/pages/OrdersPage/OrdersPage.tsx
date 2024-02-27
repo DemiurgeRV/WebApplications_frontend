@@ -5,7 +5,7 @@ import BreadCrumbs from '../../components/BreadCrumbs/BreadCrumbs'
 import { InputGroup, Form, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from "../../store/store"
-import { setEndData, setStartData, setStatus } from "../../store/slice/OrdersSlice"
+import { setEndData, setStartData, setStatus, setOwner } from "../../store/slice/OrdersSlice"
 import { useNavigate } from 'react-router-dom'
 import axios, { AxiosResponse } from 'axios'
 import { format } from 'date-fns'
@@ -37,12 +37,13 @@ interface Order {
 const OrdersPage: FC = () => {
     const [orders, setOrders] = useState<Order[]>([])
     const [loading, setLoading] = useState(false)
-    const [owner, setOwner] = useState('')
+    // const [owner, setOwner] = useState('')
     const [initialOrders, setInitialOrders] = useState<Order[]>([])
 
     const status = useSelector((state: RootState) => state.orders.status)
     const startDate = useSelector((state: RootState) => state.orders.startDate)
     const endDate = useSelector((state: RootState) => state.orders.endDate)
+    const owner = useSelector((state: RootState) => state.orders.owner)
     const role = localStorage.getItem('role')
 
 
@@ -84,11 +85,11 @@ const OrdersPage: FC = () => {
             params: {
                 ...(status && { status: status }),
                 ...(startDate && {date_start: format(new Date(startDate), 'yyyy-MM-dd HH:mm')}),
-                ...(endDate && {date_end: format(new Date(endDate), 'yyyy-MM-dd HH:mm')}),
+                ...(endDate && {date_end: format(new Date(endDate), 'yyyy-MM-dd HH:mm')})
             }, 
         })
-        setOrders(response.data)
         setInitialOrders(response.data)
+        handleSearchOwner()
         setLoading(false)
     }
 
@@ -100,7 +101,7 @@ const OrdersPage: FC = () => {
         return () => {
             clearInterval(intervalId)
         }
-    }, [dispatch, status, startDate, endDate])
+    }, [dispatch, status, startDate, endDate, owner])
 
     useEffect(() => {
         setLoading(true)
@@ -145,7 +146,12 @@ const OrdersPage: FC = () => {
             { (role == 'true') &&
             <InputGroup className='text-input-group'>
                 <InputGroup.Text>Создатель</InputGroup.Text>
-                <input className='date-picker' placeholder="Введите логин" value={owner} onChange={(event => setOwner(event.target.value))} />
+                <input 
+                    className='date-picker' 
+                    placeholder="Введите логин" 
+                    value={owner} 
+                    onChange={(event => dispatch(setOwner(event.target.value)))} 
+                />
                 <button className='search' onClick={handleSearchOwner}>Поиск</button>
             </InputGroup>
             }

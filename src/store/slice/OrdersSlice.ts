@@ -6,6 +6,7 @@ const OrdersSlice = createSlice({
         status: '',
         startDate: '',
         endDate: '',
+        owner: ''
     },
     reducers: {
         setStatus(state, {payload}) {
@@ -17,14 +18,18 @@ const OrdersSlice = createSlice({
         setEndData(state, action) {
             state.endDate = action.payload
         },
+        setOwner(state, action) {
+            state.owner = action.payload
+        },
         resetSearch(state) {
             state.status = '',
             state.startDate = '',
-            state.endDate = ''
+            state.endDate = '',
+            state.owner = ''
         }
     }
 })
 
-export const { setStatus, setStartData, setEndData, resetSearch } = OrdersSlice.actions
+export const { setStatus, setStartData, setEndData, setOwner, resetSearch } = OrdersSlice.actions
 
 export default OrdersSlice.reducer

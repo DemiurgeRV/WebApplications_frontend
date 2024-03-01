@@ -85,11 +85,11 @@ const OrdersPage: FC = () => {
             params: {
                 ...(status && { status: status }),
                 ...(startDate && {date_start: format(new Date(startDate), 'yyyy-MM-dd HH:mm')}),
-                ...(endDate && {date_end: format(new Date(endDate), 'yyyy-MM-dd HH:mm')})
+                ...(endDate && {date_end: format(new Date(endDate), 'yyyy-MM-dd HH:mm')}),
             }, 
         })
+        setOrders(response.data)
         setInitialOrders(response.data)
-        handleSearchOwner()
         setLoading(false)
     }
 
@@ -101,7 +101,7 @@ const OrdersPage: FC = () => {
         return () => {
             clearInterval(intervalId)
         }
-    }, [dispatch, status, startDate, endDate, owner])
+    }, [dispatch, status, startDate, endDate])
 
     useEffect(() => {
         setLoading(true)

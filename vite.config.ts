@@ -10,6 +10,7 @@ export default defineConfig({
             '/api': ' http://192.168.226.36:8000/',
         }
   },
+  base: "/WebApplications_frontend/",
   plugins: [
     react(),
     VitePWA({
@@ -21,6 +22,11 @@ export default defineConfig({
         theme_color: '#ffffff',
         icons: [
           {
+            src: '/assets/icon/android-chrome-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
             src: '/assets/icon/android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png'
@@ -29,5 +35,4 @@ export default defineConfig({
       }
     })
   ],
-  base: "/WebApplications_frontend/"
 })
